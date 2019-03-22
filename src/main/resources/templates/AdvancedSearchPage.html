@@ -1,0 +1,130 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+   <head>
+      <title>Spring MVC Form Handling</title>
+      <style>
+      td {
+      	padding-bottom: 20px;
+      	padding-right:50px
+      }
+      
+      h5 {
+      	margin: 0;
+      	font-weight:400;
+      }
+      </style>
+   </head>
+   <body id="pageBody" style="display:none">
+   	<div style="clear:both;">
+   	  <a style="float:right;line-height: 3em;" href="logOut">Logout</a>
+   	  <span style="float:right;margin-right: 20px;line-height: 3em;" th:text="${userEmail}">Test</span>
+   	  <h1 style="text-align: center;">Welcome To The Library!</h1>
+   	</div>
+
+      <h2>Advanced Search</h2>      
+      <form id="advancedSearchForm" onsubmit="return validateSearchForm()" method="post" action="/search" th:action="@{/search}">
+      	<div style="margin-bottom: 20px">
+      		<p>Search Terms <input id="searchTerms" type="text" th:field="${searchRequestDetails.searchTerms}" style="width:330px;"/></p>
+      	</div>   	
+      	
+        <table>            
+        	<tr>
+            	<td>
+				<div>
+					<input type="checkbox" id="extendedSearch" th:field="${searchRequestDetails.extendedSearch}" style="display:none"/>
+				</div>	           	
+               	<div id="serchCategories" style="border:1px solid black">
+					<div>
+						<input type="checkbox" id="searchInBooks" th:field="${searchRequestDetails.searchInBooks}" />
+						<label th:for="searchInBooks" th:text="Books"></label>
+					</div>	
+					<div>
+						<input type="checkbox" id = "searchInMovies" th:field="${searchRequestDetails.searchInMovies}"/>
+						<label th:for="searchInMovies" th:text="Movies"></label>
+					</div>	
+					<div>
+						<input type="checkbox" id = "searchInMusic" th:field="${searchRequestDetails.searchInMusic}"/>
+						<label th:for="searchInMusic" th:text="Music"></label>
+					</div>	
+               	</div>
+			   </td>
+            </tr>
+            
+            <tr id="allDetailCheckboxes" valign="top">
+               <td>
+               <h5>Books</h5>
+               	<div id="searchInBooksDetails" style="border:1px solid black; padding:5px">
+					<div>
+						<input type="checkbox" id="bookTitle" th:field="${searchRequestDetails.searchBookTitle}"/>
+						<label th:for="bookTitle" th:text="'Title'"></label>
+					</div>	
+					<div>
+						<input type="checkbox" id="bookAuthor" th:field="${searchRequestDetails.searchBookAuthor}"/>
+						<label th:for="bookAuthor" th:text="'Author'"></label>
+					</div>
+					<div>
+						<input type="checkbox" id="bookCategory" th:field="${searchRequestDetails.searchBookCategory}"/>
+						<label th:for="bookCategory" th:text="'Category'"></label>
+					</div>							
+					<div>
+						<input type="checkbox" id="bookPublisher" th:field="${searchRequestDetails.searchBookPublisher}"/>
+						<label th:for="bookPublisher" th:text="'Publisher'"></label>
+					</div>
+					<div>
+						<input type="checkbox" id="bookDescription" th:field="${searchRequestDetails.searchBookDescription}"/>
+						<label th:for="bookDescription" th:text="'Description'"></label>
+					</div>	
+					<div>
+						<input type="checkbox" id="bookISBN" th:field="${searchRequestDetails.searchBookISBN}"/>
+						<label th:for="bookISBN" th:text="'ISBN'"></label>
+					</div>		
+               	</div>
+			   </td>
+               <td>
+                <h5>Music</h5>
+               	<div id="searchInMusicDetails" style="border:1px solid black; padding:5px">
+					<div>
+						<input type="checkbox" id="musicAlbumName" th:field="${searchRequestDetails.searchMusicAlbumName}"/>
+						<label th:for="musicAlbumName" th:text="'Album Name'"></label>
+					</div>	
+					<div>
+						<input type="checkbox" id="musicArtist" th:field="${searchRequestDetails.searchMusicArtist}"/>
+						<label th:for="musicArtist" th:text="'Artist'"></label>
+					</div>	
+					<div>
+						<input type="checkbox" id="musicRecordLabel" th:field="${searchRequestDetails.searchMusicRecordLabel}"/>
+						<label th:for="musicRecordLabel" th:text="'Record Label'"></label>
+					</div>	
+               	</div>
+			   </td>
+               <td>
+                <h5>Movies</h5>
+               	<div id="searchInMoviesDetails" style="border:1px solid black; padding:5px">
+					<div>
+						<input type="checkbox" id="movieTitle" th:field="${searchRequestDetails.searchMovieTitle}"/>
+						<label th:for="movieTitle" th:text="'Title'"></label>
+					</div>	
+					<div>
+						<input type="checkbox" id="movieDirector" th:field="${searchRequestDetails.searchMovieDirector}"/>
+						<label th:for="movieDirector" th:text="'Director'"></label>
+					</div>	
+					<div>
+						<input type="checkbox" id="movieDescription" th:field="${searchRequestDetails.searchMovieDescription}"/>
+						<label th:for="movieDescription" th:text="'Description'"></label>
+					</div>	
+               	</div>
+			   </td>
+            </tr>
+            <tr>
+               <td colspan = "2">
+                  <input type = "submit" value = "Search"/>
+               </td>
+            </tr>
+         </table>  
+      </form>      
+   </body>
+   
+   	<script src="js/SearchCreteriaInputValidation.js"></script>
+ 	<script src="js/AdvancedSearchPage.js"></script>
+   
+</html>

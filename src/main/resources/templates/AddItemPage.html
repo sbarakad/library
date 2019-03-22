@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Add Item</title>
+<meta charset="UTF-8" />
+<script type="text/javascript">
+    function setForm(value) {
+
+        if(value == 'Book') {
+            document.getElementById('Book').style='display:block;';
+            document.getElementById('Movie').style='display:none;';
+            document.getElementById('Music').style='display:none;';
+        }   
+        else if(value == 'Movie') {
+            document.getElementById('Movie').style = 'display:block;';
+            document.getElementById('Music').style = 'display:none;';
+            document.getElementById('Book').style='display:none;';
+        }
+        else {
+            document.getElementById('Music').style = 'display:block;';
+            document.getElementById('Movie').style = 'display:none;';
+            document.getElementById('Book').style='display:none;';
+        }
+    }
+
+    var loadFileBook = function(event) {
+    	var output = document.getElementById('outputBookCover');
+        output.src = URL.createObjectURL(event.target.files[0]);
+    };
+    
+    var loadFileMovie = function(event) {
+    	var output = document.getElementById('outputMovieCover');
+        output.src = URL.createObjectURL(event.target.files[0]);
+    };
+    
+    var loadFileMusic = function(event) {
+    	var output = document.getElementById('outputMusicCover');
+        output.src = URL.createObjectURL(event.target.files[0]);
+    };
+
+</script>
+<style type="text/css" media="screen">
+label {
+	display: inline-block;
+	width: 140px;
+}
+
+.formElements {
+	margin-bottom: 2%;
+}
+
+.coverImg {
+	overflow: auto;
+	width: 30%;
+}
+
+img {
+	border: 5px solid #fff;
+	border-radius: 5px;
+	padding: 7px;
+	width: 100px;
+	height: 100px;
+	float: right;
+}
+
+.btn {
+	background-color: #008CBA;
+	border-radius: 7px;
+	color: white;
+	padding: 10px;
+	text-align: center;
+	display: inline-block;
+	font-size: 16px;
+	margin: 4px 2px;
+}
+
+#headerDiv {
+	text-align: center;
+}
+
+#headerText {
+	font-size: 2em;
+	font-weight: bolder;
+}
+
+#adminLink {
+	float: right;
+	font-size: x-large;
+}
+</style>
+</head>
+<body id="">
+	<div id="headerDiv">
+		<span id="headerText">Library Management System</span> <a href="#"
+			id="adminLink">Administrator</a>
+	</div>
+	<h2>Add Item</h2>
+	<div class="formElements">
+		<label>Content Type</label> <select id="contentType"
+			onchange="setForm(this.value)">
+			<option value="Book">Book</option>
+			<option value="Movie">Movie</option>
+			<option value="Music">Music</option>
+		</select>
+	</div>
+	<div id="Book">
+		<form method="post" name="bookForm" th:action="@{/addBook}"
+			th:object="${book}">
+			<div class="formElements">
+				<label>Category</label> <select id="bookCategory"
+					th:field="*{category}">
+					<option th:value="'Mystery'" th:text="Mystery">Mystery</option>
+					<option th:value="'Romance'" th:text="Romance">Romance</option>
+					<option th:value="'History'" th:text="History">History</option>
+					<option th:value="'Sci-Fi'" th:text="Sci-Fi">Sci-Fi</option>
+					<option th:value="'Fantasy'" th:text="Fantasy">Fantasy</option>
+				</select>
+			</div>
+			<div class="formElements">
+				<label>Title</label> <input type="text" th:field="*{title}">
+			</div>
+			<div class="formElements">
+				<label>Author</label> <input type="text" th:field="*{author}">
+			</div>
+			<div class="formElements">
+				<label>ISBN</label> <input type="number" th:field="*{isbn}">
+			</div>
+			<div class="formElements">
+				<label>Publisher</label> <input type="text" th:field="*{publisher}">
+			</div>
+			<div class="formElements">
+				<label>Description</label>
+				<textarea th:field="*{description}"></textarea>
+			</div>
+			<div class="coverImg">
+				<label>Cover Image:</label> <input type="file" accept="image/*"
+					onchange="loadFileBook(event)"> <img id="outputBookCover" />
+			</div>
+			<span><input class="btn" type="submit" value="Save Item"></span>
+			<span><input class="btn" type="reset" value="Cancel"></span>
+		</form>
+	</div>
+
+	<div id="Movie" style="display: none">
+		<form method="post" name="movieForm" th:action="@{/addMovie}"
+			th:object="${movie}">
+			<div class="formElements">
+				<label>Category</label> <select id="movieCategory"
+					th:field="*{category}">
+					<option value="Action">Action</option>
+					<option value="Thiller">Thriller</option>
+					<option value="Comedy">Comedy</option>
+					<option value="Drama">Drama</option>
+					<option value="Romance">Romance</option>
+				</select>
+			</div>
+			<div class="formElements">
+				<label>Title</label> <input type="text" th:field="*{title}">
+			</div>
+			<div class="formElements">
+				<label>Director</label> <input type="text" th:field="*{director}">
+			</div>
+			<div class="formElements">
+				<label>Description</label>
+				<textarea th:field="*{description}"></textarea>
+			</div>
+			<div class="coverImg">
+				<label>Cover Image:</label> <input type="file" accept="image/*"
+					onchange="loadFileMovie(event)"> <img id="outputMovieCover" />
+			</div>
+			<span><input class="btn" type="submit" value="Save Item"></span>
+			<span><input class="btn" type="reset" value="Cancel"></span>
+		</form>
+	</div>
+
+	<div id="Music" style="display: none">
+		<form method="post" name="musicForm" th:action="@{/addMusic}"
+			th:object="${music}">
+			<div class="formElements">
+				<label>Category</label> <select id="musicCategory"
+					th:field="*{category}">
+					<option value="Rock">Rock</option>
+					<option value="Soul">Soul</option>
+					<option value="Blues">Blues</option>
+					<option value="Country">Country</option>
+				</select>
+			</div>
+			<div class="formElements">
+				<label>Title</label> <input type="text" th:field="*{title}">
+			</div>
+
+			<div class="formElements">
+				<label>Artist</label> <input type="text" th:field="*{artist}">
+			</div>
+			<div class="formElements">
+				<label>Record Label</label> <input type="text"
+					th:field="*{recordLabel}">
+			</div>
+			<div class="coverImg">
+				<label>Cover Image:</label> <input type="file" accept="image/*"
+					onchange="loadFileMusic(event)"> <img id="outputMusicCover" />
+			</div>
+			<span><input class="btn" type="submit" value="Save Item"></span>
+			<span><input class="btn" type="reset" value="Cancel"></span>
+		</form>
+	</div>
+</body>
+</html>

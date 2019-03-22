@@ -1,0 +1,67 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<html>
+<head>
+<title>Spring MVC Form Handling</title>
+<style>
+td {
+	padding-bottom: 20px;
+	padding-right: 50px
+}
+
+h5 {
+	margin: 0;
+	font-weight: 400;
+}
+
+.boxed {
+	border: 1px solid green;
+	padding: 30px;
+}
+
+a, a label {
+	cursor: pointer;
+}
+</style>
+</head>
+<body style="margin: 0 auto;">
+	<div style="float: left;">
+		<p>
+			Search Terms <input id="searchTerms" type="text"
+				style="width: 250px;" />
+		</p>
+	</div>
+
+	<a style="float: right; line-height: 3em; margin-right: 200px"
+		href="logOut">Login/Logout</a>
+	<span style="float: right; margin-right: 20px; line-height: 3em;"
+		th:text="${userEmail}">Test</span>
+	<h1 style="text-align: center;">Welcome To The Library!</h1>
+	<div style="margin-top: 50px;">
+			<form th:action="@{/welcome}" th:object="${movie}" method="post">
+				<table id="table">
+					<td th:text="${movie.director}">email error</td>
+					
+					<tr>
+					<td th:text="${movie.category}">email error</td>
+					</tr>
+					<tr>
+						<td><button type="submit">Submit</button></td>
+					</tr>
+				</table>
+			</form>
+		</div>
+		<div>
+			<table>
+				<tr>
+					<td><a href="/signIn"><div class="boxed">Books</div></a></td>
+					<td><a href="/signIn"><div class="boxed">Movies</div></a></td>
+					<td><a href="/signIn"><div class="boxed">Music</div></a></td>
+				</tr>
+			</table>
+		</div>
+	</div>
+
+</body>
+
+</html>

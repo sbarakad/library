@@ -1,0 +1,78 @@
+<html>
+<style>
+td {
+	padding-bottom: 20px;
+	padding-right: 50px
+}
+
+h5 {
+	margin: 0;
+	font-weight: 400;
+}
+</style>
+<script>
+	function showPassword(str) {
+		if (str == "check1") {
+			var password = document.getElementById("password");
+			if (password.type === "password") {
+				password.type = "text";
+			} else {
+				password.type = "password";
+			}
+		} else {
+			var cpassword = document.getElementById("cpassword");
+			if (cpassword.type === "password") {
+				cpassword.type = "text";
+			} else {
+				cpassword.type = "password";
+			}
+		}
+	}
+</script>
+<body>
+	<form action="/signUp" th:action="@{/signUp}" th:object="${user}"
+		method="post">
+		<table id="table">
+			<tr>
+				<td>Full Name:</td>
+				<td><input name="uname" type="text" th:field="*{fullName}" /></td>
+				<td th:text="${fullName}">name error</td>
+			</tr>
+			<tr>
+				<td>Phone:</td>
+				<td><input type="number" name="uphone"
+					th:field="*{phoneNumber}" /></td>
+				<td th:text="${phoneNumber}">phone error</td>
+			</tr>
+			<tr>
+				<td>Email:</td>
+				<td><input name="uemail" type="text" th:field="*{email}" /></td>
+				<td th:text="${email}">email error</td>
+			</tr>
+			<tr>
+				<td>Password:</td>
+				<td><input name="upass" type="password" th:field="*{password}" /></td>
+				<td th:text="${password}">Password error</td>
+			</tr>
+			<tr>
+				<td><input type="checkbox" id="check1"
+					onclick="showPassword('check1')">Show Password</td>
+			</tr>
+			<tr>
+				<td>Confirm Password:</td>
+				<td><input name="ucpass" type="password"
+					th:field="*{cpassword}" /></td>
+				<td th:text="${cpassword}">Password error</td>
+				<td><span id='message'></span></td>
+			</tr>
+			<tr>
+				<td><input type="checkbox" id="check2"
+					onclick="showPassword('check2')">Show Password</td>
+			</tr>
+			<tr>
+				<td><button type="submit">Submit</button></td>
+			</tr>
+		</table>
+	</form>
+</body>
+</html>

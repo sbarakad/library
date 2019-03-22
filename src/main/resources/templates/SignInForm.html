@@ -1,0 +1,47 @@
+<html>
+<style>
+td {
+	padding-bottom: 20px;
+	padding-right: 50px
+}
+
+h5 {
+	margin: 0;
+	font-weight: 400;
+}
+</style>
+<body>
+	<script>
+		function showPassword() {
+			var password = document.getElementById("upass");
+			if (password.type === "password") {
+				password.type = "text";
+			} else {
+				password.type = "password";
+			}
+		}
+	</script>
+	<form th:action="@{/signIn}" th:object="${user}" method="post">
+		<table id="table">
+			<tr>
+				<td>Email:</td>
+				<td><input name="uemail" type="text" id="uemail"
+					th:field="*{email}" /></td>
+				<td th:text="${email}">email error</td>
+			</tr>
+			<tr>
+				<td>Password:</td>
+				<td><input name="upass" type="password" id="upass"
+					th:field="*{password}" /></td>
+				<td th:text="${password}">Password error</td>
+			</tr>
+			<td><input type="checkbox" onclick="showPassword()">Show
+				Password</td>
+			</tr>
+			<tr>
+				<td><button type="submit">Submit</button></td>
+			</tr>
+		</table>
+	</form>
+</body>
+</html>

@@ -1,0 +1,104 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+   <head>
+      <title>Search Results</title>
+      <style>
+      td {
+      	padding-bottom: 20px;
+      	padding-right:50px
+      }
+      
+      h5 {
+      	margin: 0;
+      	font-weight:400;
+      }
+      </style>
+   </head>
+	<body>		
+	   	<div>
+		  <form method="post"  onsubmit="return validateSearchForm()" action="/search" th:action="@{/search}" style="float:left;line-height: 3em;">
+      		<input type="text" th:field="${searchRequestDetails.searchTerms}">
+			<input type="checkbox" id="extendedSearch" th:field="${searchRequestDetails.extendedSearch}" style="display:none"/>
+			<input type="checkbox" id="searchInBooks" th:field="${searchRequestDetails.searchInBooks}" style="display:none"/>
+			<input type="checkbox" id ="searchInMovies" th:field="${searchRequestDetails.searchInMovies}" style="display:none"/>
+			<input type="checkbox" id ="searchInMusic" th:field="${searchRequestDetails.searchInMusic}" style="display:none"/>
+			<input type="checkbox" id="bookTitle" th:field="${searchRequestDetails.searchBookTitle}" style="display:none"/>
+			<input type="checkbox" id="bookAuthor" th:field="${searchRequestDetails.searchBookAuthor}" style="display:none"/>
+			<input type="checkbox" id="bookCategory" th:field="${searchRequestDetails.searchBookCategory}" style="display:none"/>
+			<input type="checkbox" id="bookPublisher" th:field="${searchRequestDetails.searchBookPublisher}" style="display:none"/>
+			<input type="checkbox" id="bookDescription" th:field="${searchRequestDetails.searchBookDescription}" style="display:none"/>
+			<input type="checkbox" id="bookISBN" th:field="${searchRequestDetails.searchBookISBN}" style="display:none"/>
+			<input type="checkbox" id="musicAlbumName" th:field="${searchRequestDetails.searchMusicAlbumName}" style="display:none"/>
+			<input type="checkbox" id="musicArtist" th:field="${searchRequestDetails.searchMusicArtist}" style="display:none"/>
+			<input type="checkbox" id="musicRecordLabel" th:field="${searchRequestDetails.searchMusicRecordLabel}" style="display:none"/>
+			<input type="checkbox" id="movieTitle" th:field="${searchRequestDetails.searchMovieTitle}" style="display:none"/>
+			<input type="checkbox" id="movieDirector" th:field="${searchRequestDetails.searchMovieDirector}" style="display:none"/>
+			<input type="checkbox" id="movieDescription" th:field="${searchRequestDetails.searchMovieDescription}" style="display:none"/>
+      		<input type="submit">		      									
+		  </form>		    
+	   	  <a style="float:right;line-height: 3em;" href="logOut">Logout</a>
+	   	  <span style="float:right;margin-right: 20px;line-height: 3em;" th:text="${userEmail}">Test</span>
+	   	  <h1 style="text-align: center;">Welcome To The Library!</h1>
+	   	</div>
+		<div>
+		  <span style="color: blue;display:block;width: 100%;">Books</span>
+		  <div style="width: 9%;display: inline-block;vertical-align: top;" th:each="book : ${searchResults.bookSearchResults}">
+			<a href="">
+<!-- 			  <img style="width: 100%;" src="\searchResults\100001.jpg"/>
+ -->						  
+ 				<img style="width: 100%;" th:src="${book.coverImageUrl}"/>
+ 				 <p th:text=${book.title} style="text-align: center;"></p>	
+			</a>	  
+		  </div>
+		</div>
+		<div>
+		  <span style="color: blue;display:block;width: 100%;">Music</span>
+			  <div style="width: 9%;display: inline-block;vertical-align: top;" th:each="music : ${searchResults.musicSearchResults}">
+			  	<a href="">
+			      <img style="width: 100%;" th:src="${music.coverImageUrl}"/>
+			      <p th:text=${music.title} style="text-align: center;"></p>
+			    </a>		  
+			  </div>
+		</div>		
+		<div>
+		  <span style="color: blue;display:block;width: 100%;">Movies</span>
+			  <div style="width: 9%;display: inline-block;vertical-align: top;" th:each="movie : ${searchResults.movieSearchResults}">
+			  	<a href="">
+			      <img style="width: 100%;" th:src="${movie.coverImageUrl}"/>
+			      <p th:text=${movie.title} style="text-align: center;"></p>	
+			    </a>	  
+			  </div>		  
+		</div>	
+		<div>	
+		  <div style="margin-left: 40%">
+		    <div style="display:inline-block;font-size: 2em;cursor:pointer;"><<</div>
+		    <div style="display:inline-block;">
+				<form method="post" action="/search" th:action="@{/search}">
+		      		<input type="text" th:field="${searchRequestDetails.requestedResultsPageNumber}" 
+		      						maxlength="3" style="font-size:2em;margin: 0 0.5em; width:50px;padding: 0 2%;"/>
+		      		<input type="text" th:field="${searchRequestDetails.searchTerms}" style="display:none">
+		      		<input type="submit" style="display:none">		      						
+					<input type="checkbox" id="extendedSearch" th:field="${searchRequestDetails.extendedSearch}" style="display:none"/>
+					<input type="checkbox" id="searchInBooks" th:field="${searchRequestDetails.searchInBooks}" style="display:none"/>
+					<input type="checkbox" id ="searchInMovies" th:field="${searchRequestDetails.searchInMovies}" style="display:none"/>
+					<input type="checkbox" id ="searchInMusic" th:field="${searchRequestDetails.searchInMusic}" style="display:none"/>
+					<input type="checkbox" id="bookTitle" th:field="${searchRequestDetails.searchBookTitle}" style="display:none"/>
+					<input type="checkbox" id="bookAuthor" th:field="${searchRequestDetails.searchBookAuthor}" style="display:none"/>
+					<input type="checkbox" id="bookCategory" th:field="${searchRequestDetails.searchBookCategory}" style="display:none"/>
+					<input type="checkbox" id="bookPublisher" th:field="${searchRequestDetails.searchBookPublisher}" style="display:none"/>
+					<input type="checkbox" id="bookDescription" th:field="${searchRequestDetails.searchBookDescription}" style="display:none"/>
+					<input type="checkbox" id="bookISBN" th:field="${searchRequestDetails.searchBookISBN}" style="display:none"/>
+					<input type="checkbox" id="musicAlbumName" th:field="${searchRequestDetails.searchMusicAlbumName}" style="display:none"/>
+					<input type="checkbox" id="musicArtist" th:field="${searchRequestDetails.searchMusicArtist}" style="display:none"/>
+					<input type="checkbox" id="musicRecordLabel" th:field="${searchRequestDetails.searchMusicRecordLabel}" style="display:none"/>
+					<input type="checkbox" id="movieTitle" th:field="${searchRequestDetails.searchMovieTitle}" style="display:none"/>
+					<input type="checkbox" id="movieDirector" th:field="${searchRequestDetails.searchMovieDirector}" style="display:none"/>
+					<input type="checkbox" id="movieDescription" th:field="${searchRequestDetails.searchMovieDescription}" style="display:none"/>				
+				</form>		    
+		    </div>
+		    <div style="display:inline-block;font-size: 2em;cursor:pointer;">>></div>
+		  </div>
+		</div>
+	</body>
+	<script src="js/SearchCreteriaInputValidation.js"></script>
+</html>
